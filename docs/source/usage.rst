@@ -73,6 +73,7 @@ where ``biological_model = {'Bursty','Constitutive','Extrinsic','CIR'}`` represe
 To define the search parameters, initialize an instance of :py:class:`inference.InferenceParameters`:
 
 .. code-block:: python
+
  inference_parameters = InferenceParameters(phys_lb,phys_ub,samp_lb,samp_ub,gridsize,\
                      dataset_string,fitmodel,use_lengths)
 
@@ -81,6 +82,7 @@ where ``phys_lb`` and ``phys_ub`` are bounds on the transcriptional process mode
 To create a ``SearchData`` object to input into the inference process, run :py:func:`extract_data.extract_data`:
 
 .. code-block:: python
+
  extract_data(loom_filepath, transcriptome_filepath, dataset_name,
                                 dataset_string, dir_string)
 
@@ -90,5 +92,8 @@ Running the inference pipeline
 To run the pipeline, simply call the following parallelized code:
 
 .. code-block:: python
- inference_parameters.fit_all_grid_points(n_cores,search_data)
+
+  inference_parameters.fit_all_grid_points(n_cores,search_data)
+
+This will iterate over all grid points using ``n_cores`` processors.
 
