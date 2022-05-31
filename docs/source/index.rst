@@ -9,7 +9,7 @@ For an example of the software applied to four small datasets, see the `demo Col
 
 .. note::
 
-   This project is under active development.
+   This project and its documentation are under active development.
 
 Contents
 --------
