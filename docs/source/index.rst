@@ -1,7 +1,7 @@
 *Monod*, a package for CME inference from scRNA-seq data
 ===================================
 
-*Monod* implements procedures for fitting and analyzing stochastic models of transcription and sequencing..
+*Monod* implements procedures for fitting and analyzing stochastic models of transcription and sequencing.
 
 The :doc:`usage` page documents how to use the software, including its :ref:`installation`.
 
