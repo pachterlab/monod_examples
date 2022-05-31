@@ -15,6 +15,7 @@ To use *Monod*, install it from `pip`:
 To use it in your code, import the package components:
 
 .. code-block:: python
+
  import monod
  from monod import *
  from monod.preprocess import *
@@ -117,7 +118,7 @@ To load the search results, import the file string:
 
  sr = load_search_results(result_string)
 
-To identify the technical noise parameter optimum, call a method of `sr`:
+To identify the technical noise parameter optimum, call a method of a SearchResults object `sr`:
 
 .. code-block:: python
 
@@ -156,7 +157,7 @@ As the standard error computation is typically computationally intensive, it is 
 
  sr.update_on_disk()
 
-Performing model identification 
+Model determination 
 ----------------
 
 Given a single search data object ``sd`` and a set of fits, stored in the entries of ``sr_arr``, under different models, defined in ``models``, the algorithm can assign AIC weights to the different transcriptional noise models:
@@ -166,7 +167,7 @@ Given a single search data object ``sd`` and a set of fits, stored in the entrie
    n_models = len(models)
    w_ = plot_AIC_weights(sr_arr,sd,models,meta=dataset_name)
 
-Given multiple datasets with ``SearchData`` objects in the entries of ``sd_arr``, we can investigate whether the weight of model ``k`` is consistent between their genes:
+Given multiple datasets with ``SearchData`` objects in the entries of ``sd_arr``, it is possible to investigate whether the weight of model ``k`` is consistent between their genes:
 
 .. code-block:: python
 
@@ -181,7 +182,39 @@ Given multiple datasets with ``SearchData`` objects in the entries of ``sd_arr``
      w_ = plot_AIC_weights(sr_arr,sd_arr[j],models,meta=dataset_names[j])
      w.append(w_)
  w = np.asarray(w)
- compare_AIC_weights(w,dataset_names,sr_arr[0].batch_analysis_string)
+ compare_AIC_weights(w,dataset_names,sr_arr[0].batch_analysis_string,model_ind=k)
 
 Noise decomposition
 ----------------
+Two complementary methods are available for investigating the contributions of different noise sources. The first is non-parametric; calling a method of a ``SearchData`` object ``sd`` returns the fractions of variation retained and discarded after normalization and log-transformation:
+
+.. code-block:: python
+
+ f = sd.get_noise_decomp()
+ 
+These fractions are not guaranteed to be positive, because the transformations may *increase* the relative spread of the data. On the other hand, if a fit has been completed, a method of a ``SearchResults`` object ``sr`` reports the fractions of intrinsic, extrinsic (bursty), and technical variation for each gene and molecular species:
+
+.. code-block:: python
+
+ f = sr.get_noise_decomp()
+ 
+Differential parameter value identification
+----------------
+Given a set of matched datasets, run with the same model over the same set of genes, two approaches are available for identifying putative patterns of differential expression and regulation. A non-parametric, biology-agnostic one uses a simple $t$-test to identify differences in the means of genes in ``SearchData`` objects ``sd1`` and ``sd2``:
+
+.. code-block:: python
+
+ gf = compute_diffexp(sd1,sd2)
+ 
+where ``gf`` is boolean vector that reports ``True`` if the gene is identified as DE. However, this approach cannot identify differences if biological parameters change in a correlated way and the mean stays the same. We introduce a parametric approach for the identification of differentially regulated parameters based on two ``SearchResults`` objects ``sr1`` and ``sr2``:
+
+.. code-block:: python
+
+ gf = compute_diffreg(sr1,sr2)
+ 
+where ``gf`` is a two-dimensional boolean array that reports ``True`` if a particular *parameter* is identified as DR. After using these arrays to find a subpopulation of interest -- e.g., genes that do not exhibit variation in the spliced mean, but do exhibit modulation in the burst size -- it is possible to plug the gene filter ``genes_to_plot`` back in to inspect the raw data and fits:
+
+.. code-block:: python
+
+ gf = compare_gene_distributions(sr_arr,sd_arr,genes_to_plot)
+ 
