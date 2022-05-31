@@ -200,7 +200,7 @@ These fractions are not guaranteed to be positive, because the transformations m
  
 Differential parameter value identification
 ----------------
-Given a set of matched datasets, run with the same model over the same set of genes, two approaches are available for identifying putative patterns of differential expression and regulation. A moment-based, biology-agnostic one uses a simple $t$-test to identify differences in the means of genes in ``SearchData`` objects ``sd1`` and ``sd2``:
+Given a set of matched datasets, run with the same model over the same set of genes, two approaches are available for identifying putative patterns of differential expression and regulation. A moment-based, biology-agnostic one uses a simple *t*-test to identify differences in the means of genes in ``SearchData`` objects ``sd1`` and ``sd2``:
 
 .. code-block:: python
 
