@@ -1,9 +1,4 @@
-Template for the Read the Docs tutorial
+Tutorials for *Monod*, a package for CME inference from seq data
 =======================================
 
-This GitHub template includes fictional Python library
-with some basic Sphinx docs.
-
-Read the tutorial here:
-
-https://docs.readthedocs.io/en/stable/tutorial/
+This repository contains tutorials for `Monod <https://github.com/pachterlab/monod>`_. For usage instructions, see the `readthedocs page <https://monod-examples.readthedocs.io/en/latest/usage.html>`_. For figures and theoretical results which appear in the manuscript, see the `notebook directory <https://github.com/pachterlab/monod_examples/tree/main/manuscript_computation>`_. For a small sample workflow, see the `Colaboratory notebook <https://github.com/pachterlab/monod_examples/blob/main/Monod_demo.ipynb>`_ and the `sample dataset <https://github.com/pachterlab/monod_examples/tree/main/sample_data>`_. For
