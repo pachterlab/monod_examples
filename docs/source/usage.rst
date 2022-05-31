@@ -11,6 +11,17 @@ To use *Monod*, install it from `pip`:
 .. code-block:: console
 
  pip install monod
+ 
+To use it in your code, import the package components:
+
+.. code-block:: python
+ import monod
+ from monod import *
+ from monod.preprocess import *
+ from monod.extract_data import *
+ from monod.cme_toolbox import CMEModel
+ from monod.inference import InferenceParameters, GradientInference
+ from monod.analysis import *
 
 Quantification 
 ----------------
@@ -44,6 +55,7 @@ To then generate the count matrices in ``loom`` format, use ``kb count``:
    DATASET_FASTQ_LOCATIONS
 
 This generates a ``loom`` file in ``OUTDIR/counts_filtered/``.
+
 
 Pre-processing 
 ----------------
@@ -83,7 +95,7 @@ To create a ``SearchData`` object to input into the inference process, run :py:f
 
 .. code-block:: python
 
- extract_data(loom_filepath, transcriptome_filepath, dataset_name,
+ dir_string,dataset_strings = extract_data(loom_filepath, transcriptome_filepath, dataset_name,
                                 dataset_string, dir_string)
 
 Running the inference pipeline 
@@ -93,7 +105,83 @@ To run the pipeline, simply call the following parallelized code:
 
 .. code-block:: python
 
-  inference_parameters.fit_all_grid_points(n_cores,search_data)
+  result_string = inference_parameters.fit_all_grid_points(n_cores,search_data)
 
 This will iterate over all grid points using ``n_cores`` processors.
 
+Post-processing and QC
+----------------
+To load the search results, import the file string:
+
+.. code-block:: python
+
+ sr = load_search_results(result_string)
+
+To identify the technical noise parameter optimum, call a method of `sr`:
+
+.. code-block:: python
+
+ sr.find_sampling_optimum()
+
+Optionally, test its stability under subsampling and chi-squared testing:
+
+.. code-block:: python
+
+ fig1,ax1 = plt.subplots(1,1)
+ sr.plot_landscape(ax1)
+ _=sr.chisquare_testing(sd)
+ sr.resample_opt_viz()
+ sr.resample_opt_mc_viz()
+ sr.chisq_best_param_correction(sd,viz=True)
+
+Optionally, examine whether the distribution fits match the raw data:
+
+.. code-block:: python
+
+ sr.plot_gene_distributions(sd,marg='joint')
+ sr.plot_gene_distributions(sd,marg='nascent')
+ sr.plot_gene_distributions(sd,marg='mature')
+
+To chracterize the uncertainty, variation, and bias in biological parameters, compute the standard errors of their maximum likelihood estimates, then plot their distributions and dependence on length (which should be minimal):
+
+.. code-block:: python
+
+ sr.compute_sigma(sd,num_cores)
+ sr.plot_param_L_dep(plot_errorbars=True,plot_fit=True)
+ sr.plot_param_marg()
+
+As the standard error computation is typically computationally intensive, it is useful to store an updated copy on disk after evaluating it:
+
+.. code-block:: python
+
+ sr.update_on_disk()
+
+Performing model identification 
+----------------
+
+Given a single search data object ``sd`` and a set of fits, stored in the entries of ``sr_arr``, under different models, defined in ``models``, the algorithm can assign AIC weights to the different transcriptional noise models:
+
+.. code-block:: python
+
+   n_models = len(models)
+   w_ = plot_AIC_weights(sr_arr,sd,models,meta=dataset_name)
+
+Given multiple datasets with ``SearchData`` objects in the entries of ``sd_arr``, we can investigate whether the weight of model ``k`` is consistent between their genes:
+
+.. code-block:: python
+
+ for j in range(n_datasets):    
+     rs = result_strings[j]
+     sr_arr = []
+     for k in range(n_models):
+         sr = load_search_results(rs[k])
+         sr.find_sampling_optimum()
+         sr_arr.append(sr)
+     make_batch_analysis_dir(sr_arr,dir_string)
+     w_ = plot_AIC_weights(sr_arr,sd_arr[j],models,meta=dataset_names[j])
+     w.append(w_)
+ w = np.asarray(w)
+ compare_AIC_weights(w,dataset_names,sr_arr[0].batch_analysis_string)
+
+Noise decomposition
+----------------
