@@ -1,4 +1,4 @@
-This directory contains notebooks used to generate manuscript figures and results. 
+This directory contains notebooks and scripts used to generate manuscript figures and results. 
 
 * `gg220527_allen_celltypes_modelcomp_fit.ipynb` and `gg220525_modelcomp_fit.ipynb`: running pipeline on Allen and 10X datasets.
 * `gg220529_burst_const_comparison.ipynb`: model comparison between constitutive and bursty models, on all datasets.
