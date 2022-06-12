@@ -157,33 +157,6 @@ As the standard error computation is typically computationally intensive, it is 
 
  sr.update_on_disk()
 
-Model determination 
-----------------
-
-Given a single search data object ``sd`` and a set of fits, stored in the entries of ``sr_arr``, under different models, defined in ``models``, the algorithm can assign AIC weights to the different transcriptional noise models:
-
-.. code-block:: python
-
-   n_models = len(models)
-   w_ = plot_AIC_weights(sr_arr,sd,models,meta=dataset_name)
-
-Given multiple datasets with ``SearchData`` objects in the entries of ``sd_arr``, it is possible to investigate whether the weight of model ``k`` is consistent between their genes:
-
-.. code-block:: python
-
- for j in range(n_datasets):    
-     rs = result_strings[j]
-     sr_arr = []
-     for k in range(n_models):
-         sr = load_search_results(rs[k])
-         sr.find_sampling_optimum()
-         sr_arr.append(sr)
-     make_batch_analysis_dir(sr_arr,dir_string)
-     w_ = plot_AIC_weights(sr_arr,sd_arr[j],models,meta=dataset_names[j])
-     w.append(w_)
- w = np.asarray(w)
- compare_AIC_weights(w,dataset_names,sr_arr[0].batch_analysis_string,model_ind=k)
-
 Noise decomposition
 ----------------
 Two complementary methods are available for investigating the contributions of different noise sources. The first is non-parametric; calling a method of a ``SearchData`` object ``sd`` returns the fractions of variation retained and discarded after normalization and log-transformation:
