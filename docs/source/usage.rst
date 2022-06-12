@@ -70,7 +70,7 @@ To define a "batch," or a set of inference runs, run :py:func:`preprocess.constr
 
 To import the files, specify the raw data (``loom``, ``mtx``, or ``adata``) filepaths in ``raw_filepaths``, a gene length annotation filepath ``transcriptome_filepath``, and various batch and dataset metadata. To specify the number of genes to analyze, set ``n_genes``. 
 
-This will create a batch directory, dataset-specific subdirectories, the file ``gene_set.csv`` with the list of genes that meet filtering thresholds for all datasets, and the file ``genes.csv`` with the list of genes selected for further analysis. 
+This will create a batch directory, dataset-specific subdirectories, the file ``gene_set.csv`` with the list of genes that meet filtering thresholds for all datasets, and the file ``genes.csv`` with the list of genes selected for further analysis. This gene list can also be defined or updated manually, but inference is typically unsuitable for genes that do not meet the filtering thresholds.
 
 Model, data, and parameter definition 
 ----------------
@@ -173,21 +173,21 @@ These fractions are not guaranteed to be positive, because the transformations m
  
 Differential parameter value identification
 ----------------
-Given a set of matched datasets, run with the same model over the same set of genes, two approaches are available for identifying putative patterns of differential expression and regulation. A moment-based, biology-agnostic one uses a simple *t*-test to identify differences in the means of genes in ``SearchData`` objects ``sd1`` and ``sd2``:
+Given a set of matched datasets, run with the same model over the same set of genes, two approaches are available for identifying putative patterns of differential expression and regulation. A moment-based, biology-agnostic one uses a simple *t*-test to identify differences in the means of spliced counts in ``SearchData`` objects ``sd1`` and ``sd2``:
 
 .. code-block:: python
 
  gf = compute_diffexp(sd1,sd2)
  
-where ``gf`` is boolean vector that reports ``True`` if the gene is identified as DE. However, this approach cannot identify differences if biological parameters change in a correlated way and the mean stays the same. We introduce a more mechanistic approach for the identification of differentially regulated parameters based on two ``SearchResults`` objects ``sr1`` and ``sr2``:
+where ``gf`` is boolean vector that reports ``True`` if the gene is identified as DE. However, this approach cannot identify differences if biological parameters change in a correlated way and the mean stays the same. We introduce a more mechanistic approach for the identification of differential expression suggested by parameter variation, based on two ``SearchResults`` objects ``sr1`` and ``sr2``:
 
 .. code-block:: python
 
  gf = compute_diffreg(sr1,sr2)
  
-where ``gf`` is a two-dimensional boolean array that reports ``True`` if a particular *parameter* is identified as DR. After using these arrays to find a subpopulation of interest -- e.g., genes that do not exhibit variation in the spliced mean, but do exhibit modulation in the burst size -- it is possible to plug the gene filter ``genes_to_plot`` back in to inspect the raw data and fits:
+where ``gf`` is a two-dimensional boolean array that reports ``True`` if a particular *parameter* is identified as DE. After using these arrays to find a subpopulation of interest -- e.g., genes that do not exhibit variation in the spliced mean, but do exhibit modulation in the burst size -- it is possible to plug the gene filter ``genes_to_plot`` back in to inspect the raw data and fits:
 
 .. code-block:: python
 
- gf = compare_gene_distributions(sr_arr,sd_arr,genes_to_plot)
+ gf = compare_gene_distributions(sr_arr,sd_arr,genes_to_plot=genes_to_plot)
  
