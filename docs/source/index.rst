@@ -5,7 +5,7 @@
 
 The :doc:`usage` page documents how to use the software, including its :ref:`installation`.
 
-For an example of the software applied to four small datasets, see the `demo Colaboratory notebook <https://github.com/pachterlab/monod_examples/blob/main/Monod_demo.ipynb>`_.
+For an example of the software applied to a small dataset, see the `demo Colaboratory notebook <https://github.com/pachterlab/monod_examples/blob/main/Monod_demo.ipynb>`_.
 
 .. note::
 
