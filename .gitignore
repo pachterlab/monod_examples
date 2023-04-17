@@ -8,6 +8,7 @@
 
 #search data
 **/*.sd
+!/sample_data/fits/*
 
 .ipynb_checkpoints
 */.ipynb_checkpoints/*
