@@ -7,8 +7,8 @@ This directory contains notebooks used to generate manuscript figures and result
   * `gg230316_brain_nuc_fit.ipynb` to fit the single-cell and single-nucleus data from 10x.
   * `gg230328_brain_nuc_analysis.ipynb` to analyze the results.
 * Figure 4:
-  `gg230313_desai_fit.ipynb` to fit the Desai data.
-  `gg230328_diffexp.ipynb` to summarize Figure 4 of "Length Biases..." and the Desai fits.
+  * `gg230313_desai_fit.ipynb` to fit the Desai data.
+  * `gg230328_diffexp.ipynb` to summarize Figure 4 of "Length Biases..." and the Desai fits.
 
 The raw data and full search results have been deposited on Zenodo. The prerequisite data and fits corresponding to "Length Biases..."  content is available at [Zenodo](https://zenodo.org/record/7388133) and [the manuscript GitHub](https://github.com/pachterlab/GP_2021_3).
 
