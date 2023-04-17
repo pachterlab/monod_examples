@@ -8,7 +8,8 @@
 
 #search data
 **/*.sd
-!/sample_data/fits/*
+!/sample_data/fits/gg_230417_026_mouse_1/allen_C01_gaba/raw.sd
+!/sample_data/fits/gg_230417_026_mouse_1/allen_C01_glu/raw.sd
 
 .ipynb_checkpoints
 */.ipynb_checkpoints/*
