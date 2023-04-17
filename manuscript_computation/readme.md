@@ -16,4 +16,4 @@ In addition, `gg220623_moments.m` is a MATLAB script used to calculate lower mom
 
 The `figs/` directory contains manuscript figures.
 
-`celltype_splitter.ipynb` extracts glutamatergic and GABAergic cell types for the `sample_data`.
+`celltype_splitter.ipynb` extracts glutamatergic and GABAergic cell types for `sample_data`.
