@@ -15,3 +15,5 @@ The raw data and full search results have been deposited on Zenodo. The prerequi
 In addition, `gg220623_moments.m` is a MATLAB script used to calculate lower moments of the 18 implemented models (6 of biology, 3 of technical noise).
 
 The `figs/` directory contains manuscript figures.
+
+`celltype_splitter.ipynb` extracts glutamatergic and GABAergic cell types for the `sample_data`.
