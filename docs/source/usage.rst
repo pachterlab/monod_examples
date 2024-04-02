@@ -21,7 +21,7 @@ To use it in your code, import the package components:
  from monod.preprocess import *
  from monod.extract_data import *
  from monod.cme_toolbox import CMEModel
- from monod.inference import InferenceParameters, GradientInference
+ from monod import inference, mminference
  from monod.analysis import *
 
 Quantification 
@@ -87,16 +87,26 @@ To define the search parameters, initialize an instance of :py:class:`inference.
 
 .. code-block:: python
 
- inference_parameters = InferenceParameters(phys_lb,phys_ub,samp_lb,samp_ub,gridsize,\
+ inference_parameters = inference.InferenceParameters(phys_lb,phys_ub,samp_lb,samp_ub,gridsize,\
                      dataset_string,fitmodel,use_lengths)
 
 where ``phys_lb`` and ``phys_ub`` are bounds on the transcriptional process model parameters, ``samp_lb`` and ``samp_ub`` are bounds on the sampling process model parameters, ``gridsize`` defines the grid for the sampling parameter scan, and ``use_lengths`` determines whether the unspliced mRNA capture rate depends on the gene length (to model priming at ubiquitous internal polyA sites).
+
+Alternatively one can define the search parameters and cluster the data. This will run the `meK-Means <https://www.biorxiv.org/content/10.1101/2023.09.17.558131v2>`_ clustering algorithm (see the paper `here <https://www.biorxiv.org/content/10.1101/2023.09.17.558131v2>`_). We initialize an instance of :py:class:`mminference.InferenceParameters`:
+
+.. code-block:: python
+
+ inference_parameters = mminference.InferenceParameters(phys_lb,phys_ub,samp_lb,samp_ub,gridsize,\
+                     k,epochs,\
+                     dataset_string,fitmodel,use_lengths)
+
+where ``k`` is the user-defined number of clusters to learn and ``epochs`` is the numbers of rounds to learn the data clusters. All other parameters remain the same as :py:class:`inference.InferenceParameters`. 
 
 To create a ``SearchData`` object to input into the inference process, run :py:func:`extract_data.extract_data`:
 
 .. code-block:: python
 
- dir_string,dataset_strings = extract_data(loom_filepath, transcriptome_filepath, dataset_name,
+ search_data = extract_data(loom_filepath, transcriptome_filepath, dataset_name,
                                 dataset_string, dir_string)
 
 Running the inference pipeline 
