@@ -92,7 +92,7 @@ To define the search parameters, initialize an instance of :py:class:`inference.
 
 where ``phys_lb`` and ``phys_ub`` are bounds on the transcriptional process model parameters, ``samp_lb`` and ``samp_ub`` are bounds on the sampling process model parameters, ``gridsize`` defines the grid for the sampling parameter scan, and ``use_lengths`` determines whether the unspliced mRNA capture rate depends on the gene length (to model priming at ubiquitous internal polyA sites).
 
-Alternatively one can define the search parameters and cluster the data. This will run the `meK-Means <https://www.biorxiv.org/content/10.1101/2023.09.17.558131v2>`_ clustering algorithm (see the paper `here <https://www.biorxiv.org/content/10.1101/2023.09.17.558131v2>`_). We initialize an instance of :py:class:`mminference.InferenceParameters`:
+Alternatively one can define the search parameters and cluster the data. This will run the `meK-Means <https://github.com/pachterlab/CGP_2023/>`_ clustering algorithm (see the paper `here <https://www.biorxiv.org/content/10.1101/2023.09.17.558131v2>`_). We initialize an instance of :py:class:`mminference.InferenceParameters`:
 
 .. code-block:: python
 
