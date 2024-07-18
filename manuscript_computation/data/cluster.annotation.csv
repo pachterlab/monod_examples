@@ -1,0 +1,148 @@
+cluster_id,cluster_label,subclass_label,class_label,cluster_color,size
+1,Lamp5 Pax6,Lamp5,GABAergic,#DDACC9,81
+2,Lamp5 Egln3_2_1,Lamp5,GABAergic,#DD8091,179
+3,Lamp5 Pdlim5_1,Lamp5,GABAergic,#FF829E,247
+4,Lamp5 Pdlim5_2,Lamp5,GABAergic,#FF7290,537
+5,Lamp5 Slc35d3_1,Lamp5,GABAergic,#FFA388,1275
+6,Lamp5 Lhx6,Lamp5,GABAergic,#C77963,38
+7,Sncg_1,Sncg,GABAergic,#7E0ACB,107
+8,Vip Col14a1,Sncg,GABAergic,#8F1ADB,80
+9,Sncg_2,Sncg,GABAergic,#A20EAC,161
+10,Vip Serpinf1,Vip,GABAergic,#A720FF,44
+11,Vip Htr1f_1,Vip,GABAergic,#FF5FCD,45
+12,Vip Htr1f_2,Vip,GABAergic,#FF4DC1,403
+13,Vip Igfbp6,Vip,GABAergic,#7779BF,238
+14,Vip Mybpc1_1,Vip,GABAergic,#F70CF3,129
+15,Vip Mybpc1_2,Vip,GABAergic,#FF0CF6,103
+16,Vip Chat,Vip,GABAergic,#FF00FF,498
+17,Vip Lypd1,Vip,GABAergic,#B3128A,228
+18,Vip Cbln4_1,Vip,GABAergic,#FC26D2,65
+19,Vip Cbln4_2,Vip,GABAergic,#F851DF,120
+20,Vip Gpc3,Vip,GABAergic,#B09FFF,314
+21,Vip C1ql1,Vip,GABAergic,#BD3D9A,337
+22,Vip Crispld2,Vip,GABAergic,#992E81,442
+23,Sst Chodl,Sst,GABAergic,#FFFF00,120
+24,Sst Myh8_1,Sst,GABAergic,#FFB22B,396
+25,Sst Myh8_2,Sst,GABAergic,#FFB307,115
+26,Sst Hspe_1,Sst,GABAergic,#FFBF09,63
+27,Sst Hpse_2,Sst,GABAergic,#BFAF00,80
+28,Sst Hpse_3,Sst,GABAergic,#CDB115,136
+29,Sst Calb2,Sst,GABAergic,#D2A328,152
+30,Sst C1ql3_1,Sst,GABAergic,#802600,92
+31,Sst C1ql3_2,Sst,GABAergic,#804600,175
+32,Sst Crhr2_1,Sst,GABAergic,#BE8652,254
+33,Sst Crhr2_2,Sst,GABAergic,#B0993C,135
+34,Sst Th,Sst,GABAergic,#A81111,42
+35,Sst Pvalb Etv1,Sst,GABAergic,#804811,109
+36,Pvalb Gabrg1,Pvalb,GABAergic,#ED4C50,61
+37,Pvalb Reln,Pvalb,GABAergic,#BC4B11,205
+38,Pvalb Calb1,Pvalb,GABAergic,#BC2C41,65
+39,Pvalb Vipr2,Pvalb,GABAergic,#FF197F,37
+40,L2/3 IT,L2/3 IT,Glutamatergic,#6F836B,10915
+41,L5 IT Tcap_1,L5 IT,Glutamatergic,#5DDB65,7462
+42,L5 IT Tcap_2,L5 IT,Glutamatergic,#52CA74,17334
+43,L5 IT S100b,L5 IT,Glutamatergic,#00CF1E,4272
+44,L5 IT Pld5,L5 IT,Glutamatergic,#00CF1F,653
+45,L6 IT Sulf1_1,L6 IT,Glutamatergic,#37BEA2,245
+46,L6 IT Sulf1_2,L6 IT,Glutamatergic,#49C9B2,705
+47,L6 IT Sulf1_3,L6 IT,Glutamatergic,#3CBC92,1055
+48,L6 IT Sulf1_4,L6 IT,Glutamatergic,#54A8AF,2440
+49,L6 IT Car3,L6 IT Car3,Glutamatergic,#5100FF,69
+50,L5 ET_1,L5 ET,Glutamatergic,#53A367,65
+51,L5 ET_2,L5 ET,Glutamatergic,#5CA46E,39
+52,L5 ET_3,L5 ET,Glutamatergic,#5D8E76,57
+53,L5 NP Slc17a8_1,L5/6 NP,Glutamatergic,#3C78BC,633
+54,L5 NP Slc17a8_2,L5/6 NP,Glutamatergic,#5083BE,495
+55,L5 NP Slc17a8_3,L5/6 NP,Glutamatergic,#5B92B9,131
+56,L6 NP Trh_1,L5/6 NP,Glutamatergic,#47867A,1295
+57,L6 NP Trh_2,L5/6 NP,Glutamatergic,#4D8D7B,167
+58,L6 NP Trh_3,L5/6 NP,Glutamatergic,#529E88,426
+59,L6 CT Gpr139,L6 CT,Glutamatergic,#168577,130
+60,L6 CT Cpa6_1,L6 CT,Glutamatergic,#338C5E,5854
+61,L6 CT Cpa6_2,L6 CT,Glutamatergic,#409463,5986
+62,L6 CT Nxph2 Pou3f2_1,L6 CT,Glutamatergic,#3E766C,268
+63,L6 CT Nxph2 Pou3f2_2,L6 CT,Glutamatergic,#488572,535
+64,L6 CT Nxph2 Kit,L6 CT,Glutamatergic,#516B78,34
+65,L6b Rprm,L6b,Glutamatergic,#3CBC99,227
+66,L6b Shisa6,L6b,Glutamatergic,#2B9880,127
+67,L6b Ror1,L6b,Glutamatergic,#09564C,177
+68,L6b Kcnip1,L6b,Glutamatergic,#335280,23
+69,Astro Aqp4,Astro,Non-Neuronal,#7C2D1F,398
+70,OPC Pdgfra,OPC,Non-Neuronal,#476655,146
+71,Oligo Enpp6_1,Oligo,Non-Neuronal,#6B998D,38
+72,Oligo Enpp6_2,Oligo,Non-Neuronal,#749F86,32
+73,Oligo Opalin_1,Oligo,Non-Neuronal,#474662,375
+74,Oligo Opalin_2,Oligo,Non-Neuronal,#478662,92
+75,Macrophage,Macrophage,Non-Neuronal,#810E3C,122
+76,Endo Slc38a5_1,Endo,Non-Neuronal,#741150,187
+77,VLMC Kcnj8,VLMC,Non-Neuronal,#7A2855,55
+78,SMC,SMC,Non-Neuronal,#7D426C,11
+79,Lamp5 Egln3_low,Low Quality,Low Quality,#86545A,98
+80,Lamp5 Pdlim5_low,Low Quality,Low Quality,#6D5A67,52
+81,Lamp5 doublet,doublet,Low Quality,#76506D,51
+82,Lamp5 Pdlim5_1_low,Low Quality,Low Quality,#765064,142
+83,Lamp5 Pdlim5_2_low,Low Quality,Low Quality,#785164,227
+84,Lamp5 Pdlim5_3_low,Low Quality,Low Quality,#81456C,167
+85,Lamp5 Slc35d3_1_low,Low Quality,Low Quality,#8B546D,244
+86,Lamp5 Slc35d3_2_low,Low Quality,Low Quality,#896360,513
+87,Lamp5 Slc35d3_3_low,Low Quality,Low Quality,#70595B,409
+88,Lamp5 Lhx6_low,Low Quality,Low Quality,#725E4D,86
+89,Vip Serpinf1_low,Low Quality,Low Quality,#AB1DFF,127
+90,Vip Htr1f_1_low,Low Quality,Low Quality,#AA32F1,202
+91,Vip Htr1f_2_low,Low Quality,Low Quality,#EC7CDF,90
+92,Vip Igfbp6_low,Low Quality,Low Quality,#CE87CF,269
+93,Vip Chat_low,Low Quality,Low Quality,#BA85C1,539
+94,Vip Cbln4_low,Low Quality,Low Quality,#B592C1,109
+95,Vip Gpc3_low,Low Quality,Low Quality,#B497A0,380
+96,Vip C1ql1_low,Low Quality,Low Quality,#929C9A,156
+97,Vip Crispld2_low,Low Quality,Low Quality,#8F848F,201
+98,Sst Myh8_1_low,Low Quality,Low Quality,#FF9F2C,300
+99,Sst Myh8_2_low,Low Quality,Low Quality,#D89045,156
+100,Sst Myh8_3_low,Low Quality,Low Quality,#C58F51,192
+101,Sst Myh8_4_low,Low Quality,Low Quality,#BC7D4A,94
+102,Sst Hpse_1_low,Low Quality,Low Quality,#B08050,202
+103,Sst Hpse_2_low,Low Quality,Low Quality,#977563,138
+104,Sst C1ql3_1_low,Low Quality,Low Quality,#A1655E,87
+105,Sst C1ql3_2_low,Low Quality,Low Quality,#9D5A65,159
+106,Sst Oligo,Low Quality,Low Quality,#836273,32
+107,Sst Crhr2_1_low,Low Quality,Low Quality,#72545D,123
+108,Sst Crhr2_2_low,Low Quality,Low Quality,#6F6550,160
+109,Sst Crhr2_3_low,Low Quality,Low Quality,#7B525D,96
+110,Sst Crhr2_4_low,Low Quality,Low Quality,#895257,100
+111,Sst Pvalb Etv1_low,Low Quality,Low Quality,#705760,548
+112,Pvalb Gabrg1_low,Low Quality,Low Quality,#5B5D60,85
+113,Pvalb Il1rapl2_1_low,Low Quality,Low Quality,#5F695A,182
+114,Pvalb Il1rapl2_2_low,Low Quality,Low Quality,#54585D,63
+115,Pvalb Reln_1_low,Low Quality,Low Quality,#BC2D71,301
+116,Pvalb Reln_2_low,Low Quality,Low Quality,#9E2E77,333
+117,Ex Endo,doublet,Low Quality,#7F867C,28
+118,Ex Inh,doublet,Low Quality,#70906A,80
+119,L2/3 IT S100a6 _1_low,Low Quality,Low Quality,#799967,2126
+120,L2/3 IT S100a6 _2_low,Low Quality,Low Quality,#65935A,2468
+121,L2/3 IT low,Low Quality,Low Quality,#6B776F,209
+122,L5 IT Rspo1_1_low,Low Quality,Low Quality,#3CBC78,1749
+123,L5 IT Rspo1_2_low,Low Quality,Low Quality,#3CBC45,458
+124,L5 IT Rspo2_3_low,Low Quality,Low Quality,#45A150,468
+125,L5 IT S100b_1_low,Low Quality,Low Quality,#5BA861,423
+126,L5 IT S100b_2_low,Low Quality,Low Quality,#53A064,591
+127,L5 IT S100b_3_low,Low Quality,Low Quality,#439171,247
+128,L6 IT Sulf1_1_low,Low Quality,Low Quality,#4B9263,374
+129,L6 IT Sulf1_2_low,Low Quality,Low Quality,#4DB39E,207
+130,L6 IT Sulf1_3_low,Low Quality,Low Quality,#479D88,709
+131,L6 IT Sulf1_4_low,Low Quality,Low Quality,#4A9C80,627
+132,L6 IT Sulf1_5_low,Low Quality,Low Quality,#479F6B,528
+133,L6 IT Car3_Inh,doublet,Low Quality,#3F825A,28
+134,L5 ET_1_low,Low Quality,Low Quality,#467A54,77
+135,L5 ET_2_low,Low Quality,Low Quality,#406F5B,107
+136,L5 NP Slc17a8_low_1,Low Quality,Low Quality,#486462,90
+137,L5 NP Slc17a8_low_2,Low Quality,Low Quality,#556D5F,67
+138,L5 NP Slc17a8_low_3,Low Quality,Low Quality,#5E6A6C,235
+139,L6 NP Trh_Oligo,Low Quality,Low Quality,#59676B,29
+140,L6 NP Trh_low,Low Quality,Low Quality,#5A7757,364
+141,L6 CT Cpa6_2_low,Low Quality,Low Quality,#55734B,1954
+142,L6 CT Cpa6_low,Low Quality,Low Quality,#5C7061,1082
+143,L6b Shisa6_low_1,Low Quality,Low Quality,#5A7A65,84
+144,L6b Shisa6_low_2,Low Quality,Low Quality,#1F7C70,95
+145,Oligo Opalin_neuon,doublet,Low Quality,#41775C,16
+146,Endo Slc38a5_5,doublet,Low Quality,#4C6863,36
+147,Endo_VLMC,doublet,Low Quality,#5A6E5E,18
