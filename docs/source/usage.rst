@@ -90,8 +90,6 @@ The output is an anndata object including moments and fitted parameters for each
 
 Length-dependent noise models can be implemented if a transcriptome length annotation is provided, using ``transcriptome_filepath='transcriptome_filepath'``.
 
-(See Advanced for available settings.)
-
 Fitting Parameters by Cluster
 -------------------
 
@@ -100,54 +98,17 @@ Alternatively one can define the search parameters and cluster the data. This wi
 Post-processing and QC
 ----------------
 
-.. code-block:: python
-
-analysis.run_qc(fitted_adata)
-
-To retrieve the SearchResults and SearchData object from the fitted anndata object, you can run:
+To visualize the results of the fitting procedure, you can run: 
 
 .. code-block:: python
 
-search_result, search_data = fitted_adata.uns['search_result'], fitted_adata.uns['search_data']
+ analysis.run_qc(fitted_adata)
 
-To identify the technical noise parameter optimum, call a method of a SearchResults object:
+This will plot a color map of the fitted distribution for each gene against its observed count distribution.
 
-.. code-block:: python
+It will also visualize the stability of the fits under subsampling, and the length dependence of the fitted parameters.
 
- search_result.find_sampling_optimum()
 
-Optionally, test its stability under subsampling and chi-squared testing:
-
-.. code-block:: python
-
- fig1,ax1 = plt.subplots(1,1)
- sr.plot_landscape(ax1)
- _=sr.chisquare_testing(sd)
- sr.resample_opt_viz()
- sr.resample_opt_mc_viz()
- sr.chisq_best_param_correction(sd,viz=True)
-
-Optionally, examine whether the distribution fits match the raw data:
-
-.. code-block:: python
-
- sr.plot_gene_distributions(sd,marg='joint')
- sr.plot_gene_distributions(sd,marg='nascent')
- sr.plot_gene_distributions(sd,marg='mature')
-
-To chracterize the uncertainty, variation, and bias in biological parameters, compute the standard errors of their maximum likelihood estimates, then plot their distributions and dependence on length (which should be minimal):
-
-.. code-block:: python
-
- sr.compute_sigma(sd,num_cores)
- sr.plot_param_L_dep(plot_errorbars=True,plot_fit=True)
- sr.plot_param_marg()
-
-As the standard error computation is typically computationally intensive, it is useful to store an updated copy on disk after evaluating it:
-
-.. code-block:: python
-
- sr.update_on_disk()
 
 TODO: Do we want to add noise decomposition?
 
