@@ -84,3 +84,26 @@ As the standard error computation is typically computationally intensive, it is 
 
  sr.update_on_disk()
 
+Differential Parameters
+----------------
+
+Some more thoughts on differential parameters:
+
+Given a set of matched datasets, run with the same model over the same set of genes, two approaches are available for identifying putative patterns of differential expression and regulation. A moment-based, biology-agnostic one uses a simple *t*-test to identify differences in the means of spliced counts in ``SearchData`` objects ``sd1`` and ``sd2``:
+
+.. code-block:: python
+
+ gf = compute_diffexp(sd1,sd2)
+ 
+where ``gf`` is boolean vector that reports ``True`` if the gene is identified as DE. However, this approach cannot identify differences if biological parameters change in a correlated way and the mean stays the same. We introduce a more mechanistic approach for the identification of differential expression suggested by parameter variation, based on two ``SearchResults`` objects ``sr1`` and ``sr2``:
+
+.. code-block:: python
+
+ gf = compute_diffreg(sr1,sr2)
+ 
+where ``gf`` is a two-dimensional boolean array that reports ``True`` if a particular *parameter* is identified as DE. After using these arrays to find a subpopulation of interest -- e.g., genes that do not exhibit variation in the spliced mean, but do exhibit modulation in the burst size -- it is possible to plug the gene filter ``genes_to_plot`` back in to inspect the raw data and fits:
+
+.. code-block:: python
+
+ gf = compare_gene_distributions(sr_arr,sd_arr,genes_to_plot=genes_to_plot)
+
