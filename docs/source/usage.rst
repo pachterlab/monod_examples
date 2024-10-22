@@ -6,7 +6,7 @@ Usage
 Installation
 ------------
 
-To use *Monod*, install it from `pip`:
+To use *Monod*, install it from `pip` (TODO make pip-installable):
 
 .. code-block:: console
 
@@ -18,7 +18,6 @@ To use it in your code, import the package components:
 
  import monod
  from monod import *
- from monod.preprocess import *
  from monod.extract_data import *
  from monod.cme_toolbox import CMEModel
  from monod import inference, mminference
@@ -40,7 +39,7 @@ To generate an intronic index for ``kb``, obtain a reference genome and run ``kb
  ./refdata-gex-mm10-2020-A/fasta/genome.fa 
  ./refdata-gex-mm10-2020-A/genes/genes.gtf
  
-To then generate the count matrices in ``loom`` format, use ``kb count``:
+To then generate the count matrices in ``h5ad`` format, use ``kb count``:
 
 .. code-block:: console
 
@@ -52,25 +51,42 @@ To then generate the count matrices in ``loom`` format, use ``kb count``:
    -t 30 -m 30G 
    -c1 ../ref/refdata-gex-mm10-2020-A/kallisto/cdna_t2c.txt 
    -c2 ../ref/refdata-gex-mm10-2020-A/kallisto/intron_t2c.txt 
-   --workflow lamanno --filter bustools --overwrite --loom 
+   --workflow lamanno --filter bustools --overwrite --h5ad 
    DATASET_FASTQ_LOCATIONS
 
-This generates a ``loom`` file in ``OUTDIR/counts_filtered/``.
-
+This generates an ``h5ad`` file in ``OUTDIR/counts_filtered/``.
 
 Pre-processing 
 ----------------
 
-To define a "batch," or a set of inference runs, run :py:func:`preprocess.construct_batch`:
+Additional cell/gene filtering can be done using scanpy, and the resulting anndata object can be directly input into Monod. Alternatively, the raw filename can be given.
+
+TODO: add scanpy code.
+
+Inference
+----------------
+
+The entire inference procedure can be carried out in a single function,:py:func:`inference.perform_inference`, using anndata or an h5ad filename as input.
 
 .. code-block:: python
 
- dir_string,dataset_strings = construct_batch(raw_filepaths, transcriptome_filepath, dataset_names, \
-                                              attribute_names, batch_location, meta, batch_id, n_genes)
+fitted_adata = inference.perform_inference(input_adata, fitmodel)
 
-To import the files, specify the raw data (``loom``, ``mtx``, or ``adata``) filepaths in ``raw_filepaths``, a gene length annotation filepath ``transcriptome_filepath``, and various batch and dataset metadata. To specify the number of genes to analyze, set ``n_genes``. 
+Additional keyword arguments can be used to adjust the settings of the fit. TODO: go through the rest of the keyword parameters.
 
-This will create a batch directory, dataset-specific subdirectories, the file ``gene_set.csv`` with the list of genes that meet filtering thresholds for all datasets, and the file ``genes.csv`` with the list of genes selected for further analysis. This gene list can also be defined or updated manually, but inference is typically unsuitable for genes that do not meet the filtering thresholds.
+.. code-block:: python
+
+, n_genes=n_genes, seed=5,
+            phys_lb=lb, phys_ub=ub, gridsize=grid, samp_lb=samp_lb, samp_ub=samp_ub,
+            gradient_params = {'max_iterations':5,'init_pattern':'moments','num_restarts':1},
+                                         transcriptome_filepath=transcriptome_filepath, poisson_average_log_length=5, dataset_string='cite_fit', viz=True,
+                                         num_cores=32, mek_means_params=mek_means_params, filt_param = {'min_means':[0, 0, 0], 'max_maxes':[3500, 3500, 1000000], 'min_maxes':[0,0, 0]}
+
+To set the name of the output folder, set dataset_name='your_output_dirname'.
+
+You can optionally specifiy a gene length annotation filepath ``transcriptome_filepath``. To specify the number of genes to analyze, set ``n_genes``. 
+
+A file ``gene_set.csv`` will be created, with the list of genes that meet filtering thresholds for all datasets, and the file ``genes.csv`` with the list of genes selected for further analysis. This gene list can be set manually using genes_to_fit.
 
 Model, data, and parameter definition 
 ----------------
