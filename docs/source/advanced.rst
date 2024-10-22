@@ -29,3 +29,58 @@ If you do not want to use the default fit parameters, you can specify them in th
 ``gradient_params`` defines the gradient optimization parameters, e.g. ``gradient_params = {'max_iterations':5,'init_pattern':'moments','num_restarts':1}``
 
 If a transcriptome length annotation is provided, lengths will be used in determining the nascent RNA capture rate (to model priming at ubiquitous internal polyA sites). If lengths are not given, the keyword argument: ``poisson_average_log_length`` specifies, in base 10, what the universal multiplier on the nascent capture rate should be.
+
+Analysis
+----------------
+
+To perform specific analyses on the fits, we can return to the Monod specific SearchResults and SearchData objects. To retrieve these from the fitted anndata object, you can run:
+
+.. code-block:: python
+
+  search_result, search_data = fitted_adata.uns['search_result'], fitted_adata.uns['search_data']
+
+For fits with meK-Means clustering, we also have to specify a cluster for the search_result:
+
+  search_result = monod_adata.uns['search_result_list'][cluster]
+
+TODO: check the following are still correct.
+
+To identify the technical noise parameter optimum, call a method of a SearchResults object:
+
+.. code-block:: python
+
+ search_result.find_sampling_optimum()
+
+Optionally, test its stability under subsampling and chi-squared testing:
+
+.. code-block:: python
+
+ fig1,ax1 = plt.subplots(1,1)
+ sr.plot_landscape(ax1)
+ _=sr.chisquare_testing(sd)
+ sr.resample_opt_viz()
+ sr.resample_opt_mc_viz()
+ sr.chisq_best_param_correction(sd,viz=True)
+
+Optionally, examine whether the distribution fits match the raw data:
+
+.. code-block:: python
+
+ sr.plot_gene_distributions(sd,marg='joint')
+ sr.plot_gene_distributions(sd,marg='nascent')
+ sr.plot_gene_distributions(sd,marg='mature')
+
+To chracterize the uncertainty, variation, and bias in biological parameters, compute the standard errors of their maximum likelihood estimates, then plot their distributions and dependence on length (which should be minimal):
+
+.. code-block:: python
+
+ sr.compute_sigma(sd,num_cores)
+ sr.plot_param_L_dep(plot_errorbars=True,plot_fit=True)
+ sr.plot_param_marg()
+
+As the standard error computation is typically computationally intensive, it is useful to store an updated copy on disk after evaluating it:
+
+.. code-block:: python
+
+ sr.update_on_disk()
+
