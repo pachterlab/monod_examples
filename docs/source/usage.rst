@@ -6,7 +6,7 @@ Usage
 Installation
 ------------
 
-To use *Monod*, install it from `pip` (TODO make pip-installable):
+To use *Monod*, install it from `pip` (TODO update version):
 
 .. code-block:: console
 
@@ -93,7 +93,7 @@ Length-dependent noise models can be implemented if a transcriptome length annot
 Fitting Parameters by Cluster
 -------------------
 
-Alternatively one can define the search parameters and cluster the data. This will run the `meK-Means <https://github.com/pachterlab/CGP_2023/>`_ clustering algorithm (see the paper `here <https://www.biorxiv.org/content/10.1101/2023.09.17.558131v2>`_). In this case, the user should give a value for ``mek_means_params'' = (``k``, ``epochs``), where ``k`` is the user-defined number of clusters to learn and ``epochs`` is the numbers of rounds to learn the data clusters. All other parameters remain the same. 
+Alternatively one can define the search parameters and cluster the data. This will run the `meK-Means <https://github.com/pachterlab/CGP_2023/>`_ clustering algorithm (see the paper `here <https://www.biorxiv.org/content/10.1101/2023.09.17.558131v2>`_). In this case, the user should give a value for ``mek_means_params = (k, epochs)``, where ``k`` is the user-defined number of clusters to learn and ``epochs`` is the numbers of rounds to learn the data clusters. All other parameters remain the same. 
 
 Post-processing and QC
 ----------------
@@ -114,21 +114,22 @@ TODO: Do we want to add noise decomposition?
 
 Differential parameter value identification
 ----------------
-Given a set of matched datasets, run with the same model over the same set of genes, two approaches are available for identifying putative patterns of differential expression and regulation. A moment-based, biology-agnostic one uses a simple *t*-test to identify differences in the means of spliced counts in ``SearchData`` objects ``sd1`` and ``sd2``:
+
+Given two fitted anndata objects, we can analyze the differential parameters between the two datasets, as long as some genes overlap.
+
+We can run: 
 
 .. code-block:: python
 
- gf = compute_diffexp(sd1,sd2)
- 
-where ``gf`` is boolean vector that reports ``True`` if the gene is identified as DE. However, this approach cannot identify differences if biological parameters change in a correlated way and the mean stays the same. We introduce a more mechanistic approach for the identification of differential expression suggested by parameter variation, based on two ``SearchResults`` objects ``sr1`` and ``sr2``:
+ DE_genes, DE_filter, offs, residuals = analysis.DE_parameters(fitted_adata_1, fitted_adata_2)
+
+This will output a list of genes with signficantly different parameters between datasets, along with their offsets and residuals (TODO: explain).
+
+It will also modify the anndata objects, adding columns for the fold-changes in parameter values between genes in the two datasets.
+
+If we have fitted using meK-Means, we can perform differential parameter analysis between clusters in the same way, using just one anndata object:
 
 .. code-block:: python
 
- gf = compute_diffreg(sr1,sr2)
- 
-where ``gf`` is a two-dimensional boolean array that reports ``True`` if a particular *parameter* is identified as DE. After using these arrays to find a subpopulation of interest -- e.g., genes that do not exhibit variation in the spliced mean, but do exhibit modulation in the burst size -- it is possible to plug the gene filter ``genes_to_plot`` back in to inspect the raw data and fits:
-
-.. code-block:: python
-
- gf = compare_gene_distributions(sr_arr,sd_arr,genes_to_plot=genes_to_plot)
+ DE_genes, DE_filter, offs, residuals = analysis.DE_parameters(fitted_adata_mek)
  
