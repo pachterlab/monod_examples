@@ -84,22 +84,18 @@ The entire inference procedure can be carried out in a single function,:py:func:
 
  fitted_adata = inference.perform_inference(input_adata, fitmodel, dataset_string='your_output_dirname')
 
-This call will first filter the given anndata for suitable genes. Then it will iterate over all sampling parameter grid points, fit each gene with the parameters of the corresponding CME model, and output an anndata object including moments and fitted parameters for each gene. The results will be saved to the output directory specified in ``dataset_string``. (See Advanced for available settings.)
+This call will first filter the given anndata for suitable genes. Then it will iterate over a grid of sampling parameter values, and fit the optimum biological parameters for each gene for the given CME model.
 
-Fit Parameters
-------------------
+The output is an anndata object including moments and fitted parameters for each gene, at the sampling parameter optimum. The results will be saved to the output directory specified in ``dataset_string``. 
 
-If you do not want to use the default fit parameters, you can specify them in the call to :py:func:`inference.perform_inference`, using the following keywords.
+Length-dependent noise models can be implemented if a transcriptome length annotation is provided, using ``transcriptome_filepath='transcriptome_filepath'``.
 
-``phys_lb`` and ``phys_ub`` are bounds on the transcriptional process model parameters.
-``samp_lb`` and ``samp_ub`` are bounds on the sampling process model parameters.
-``gridsize`` defines the grid for the sampling parameter scan.
-``gradient_params`` defines the gradient optimization parameters, e.g. ``gradient_params = {'max_iterations':5,'init_pattern':'moments','num_restarts':1}``
+(See Advanced for available settings.)
 
-If a transcriptome length annotation is provided, lengths will be used in determining the nascent RNA capture rate (to model priming at ubiquitous internal polyA sites). If lengths are not given, the keyword argument: ``poisson_average_log_length`` specifies, in base 10, what the universal multiplier on the nascent capture rate should be.
+Fitting Parameters by Cluster
+-------------------
 
 Alternatively one can define the search parameters and cluster the data. This will run the `meK-Means <https://github.com/pachterlab/CGP_2023/>`_ clustering algorithm (see the paper `here <https://www.biorxiv.org/content/10.1101/2023.09.17.558131v2>`_). In this case, the user should give a value for ``mek_means_params'' = (``k``, ``epochs``), where ``k`` is the user-defined number of clusters to learn and ``epochs`` is the numbers of rounds to learn the data clusters. All other parameters remain the same. 
-
 
 Post-processing and QC
 ----------------
