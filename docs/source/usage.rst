@@ -63,6 +63,18 @@ Additional cell/gene filtering can be done using scanpy, and the resulting annda
 
 TODO: add scanpy code.
 
+Defining a Model
+----------------------
+
+To define a CME model of transcription and sequencing, initialize an instance of :py:class:`cme_toolbox.CMEModel`:
+
+.. code-block:: python
+
+fitmodel = cme_toolbox.CMEModel('ProteinBursty','Poisson')
+
+where ``biological_model = {'Bursty','Constitutive','Extrinsic','CIR'}`` represents the transcriptional process and ``sequencing_model = {'None','Bernoulli','Poisson'}`` represents the dynamics of the sampling process.
+
+
 Inference
 ----------------
 
@@ -88,67 +100,42 @@ You can optionally specifiy a gene length annotation filepath ``transcriptome_fi
 
 A file ``gene_set.csv`` will be created, with the list of genes that meet filtering thresholds for all datasets, and the file ``genes.csv`` with the list of genes selected for further analysis. This gene list can be set manually using genes_to_fit.
 
-Model, data, and parameter definition 
-----------------
+Monod will then iterate over all sampling parameter grid points using ``n_cores`` processors.
 
-To define a CME model of transcription and sequencing, initialize an instance of :py:class:`cme_toolbox.CMEModel`:
+Fit Parameters
+------------------
 
-.. code-block:: python
+If you do not want to use the default fit parameters, you can specify them in the call to :py:func:`inference.perform_inference`, using the following keywords.
 
- CMEModel(biological_model,sequencing_model)
+``phys_lb`` and ``phys_ub`` are bounds on the transcriptional process model parameters.
+``samp_lb`` and ``samp_ub`` are bounds on the sampling process model parameters.
+``gridsize`` defines the grid for the sampling parameter scan.
 
-where ``biological_model = {'Bursty','Constitutive','Extrinsic','CIR'}`` represents the transcriptional process and ``sequencing_model = {'None','Bernoulli','Poisson'}`` represents the dynamics of the sampling process.
+If a transcriptome length annotation is provided, lengths will be used in determining the nascent RNA capture rate (to model priming at ubiquitous internal polyA sites). If lengths are not given, the keyword argument: ``poisson_average_log_length`` specifies, in base 10, what the universal multiplier on the nascent capture rate should be.
 
-To define the search parameters, initialize an instance of :py:class:`inference.InferenceParameters`:
+Alternatively one can define the search parameters and cluster the data. This will run the `meK-Means <https://github.com/pachterlab/CGP_2023/>`_ clustering algorithm (see the paper `here <https://www.biorxiv.org/content/10.1101/2023.09.17.558131v2>`_). In this case, the user should give a value for ``mek_means_params'' = (``k``, ``epochs``), where ``k`` is the user-defined number of clusters to learn and ``epochs`` is the numbers of rounds to learn the data clusters. All other parameters remain the same. 
 
-.. code-block:: python
-
- inference_parameters = inference.InferenceParameters(phys_lb,phys_ub,samp_lb,samp_ub,gridsize,\
-                     dataset_string,fitmodel,use_lengths)
-
-where ``phys_lb`` and ``phys_ub`` are bounds on the transcriptional process model parameters, ``samp_lb`` and ``samp_ub`` are bounds on the sampling process model parameters, ``gridsize`` defines the grid for the sampling parameter scan, and ``use_lengths`` determines whether the unspliced mRNA capture rate depends on the gene length (to model priming at ubiquitous internal polyA sites).
-
-Alternatively one can define the search parameters and cluster the data. This will run the `meK-Means <https://github.com/pachterlab/CGP_2023/>`_ clustering algorithm (see the paper `here <https://www.biorxiv.org/content/10.1101/2023.09.17.558131v2>`_). We initialize an instance of :py:class:`mminference.InferenceParameters`:
-
-.. code-block:: python
-
- inference_parameters = mminference.InferenceParameters(phys_lb,phys_ub,samp_lb,samp_ub,gridsize,\
-                     k,epochs,\
-                     dataset_string,fitmodel,use_lengths)
-
-where ``k`` is the user-defined number of clusters to learn and ``epochs`` is the numbers of rounds to learn the data clusters. All other parameters remain the same as :py:class:`inference.InferenceParameters`. 
-
-To create a ``SearchData`` object to input into the inference process, run :py:func:`extract_data.extract_data`:
-
-.. code-block:: python
-
- search_data = extract_data(loom_filepath, transcriptome_filepath, dataset_name,
-                                dataset_string, dir_string)
-
-Running the inference pipeline 
-----------------
-
-To run the pipeline, simply call the following parallelized code:
-
-.. code-block:: python
-
-  result_string = inference_parameters.fit_all_grid_points(n_cores,search_data)
-
-This will iterate over all grid points using ``n_cores`` processors.
 
 Post-processing and QC
 ----------------
-To load the search results, import the file string:
+
+
 
 .. code-block:: python
 
- sr = load_search_results(result_string)
+analysis.run_qc(fitted_adata)
 
-To identify the technical noise parameter optimum, call a method of a SearchResults object `sr`:
+To retrieve the SearchResults and SearchData object from the fitted anndata object, you can run:
 
 .. code-block:: python
 
- sr.find_sampling_optimum()
+search_result, search_data = fitted_adata.uns['search_result'], fitted_adata.uns['search_data']
+
+To identify the technical noise parameter optimum, call a method of a SearchResults object:
+
+.. code-block:: python
+
+ search_result.find_sampling_optimum()
 
 Optionally, test its stability under subsampling and chi-squared testing:
 
@@ -183,20 +170,8 @@ As the standard error computation is typically computationally intensive, it is 
 
  sr.update_on_disk()
 
-Noise decomposition
-----------------
-Two complementary methods are available for investigating the contributions of different noise sources. The first is non-parametric; calling a method of a ``SearchData`` object ``sd`` returns the fractions of variation retained and discarded after normalization and log-transformation:
+TODO: Do we want to add noise decomposition?
 
-.. code-block:: python
-
- f = sd.get_noise_decomp()
- 
-These fractions are not guaranteed to be positive, because the transformations may *increase* the relative spread of the data. On the other hand, if a fit has been completed, a method of a ``SearchResults`` object ``sr`` reports the fractions of intrinsic, extrinsic (bursty), and technical variation for each gene and molecular species:
-
-.. code-block:: python
-
- f = sr.get_noise_decomp()
- 
 Differential parameter value identification
 ----------------
 Given a set of matched datasets, run with the same model over the same set of genes, two approaches are available for identifying putative patterns of differential expression and regulation. A moment-based, biology-agnostic one uses a simple *t*-test to identify differences in the means of spliced counts in ``SearchData`` objects ``sd1`` and ``sd2``:
