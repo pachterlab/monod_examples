@@ -1,7 +1,9 @@
 .. _installation:
 
-Installation (NB not valid currently - we need to update the Monod version. For now ignore this section and use git pull instead as in demo notebook)
+Installation 
 ------------
+
+(NB not valid currently - we need to update the Monod version. For now ignore this section and use git pull instead as in demo notebook)
 
 To use *Monod*, install it from `pip` (TODO update version):
 
