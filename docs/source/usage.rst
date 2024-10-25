@@ -30,7 +30,7 @@ where ``biological_model = {'Bursty','Constitutive','Extrinsic','CIR'}`` represe
 Inference
 ----------------
 
-The entire inference procedure can be carried out in a single function,:py:func:`inference.perform_inference`, using anndata or an h5ad filename as input.
+The entire inference procedure can be carried out in a single function, :py:func:`inference.perform_inference`, using anndata or an h5ad filename as input.
 
 .. code-block:: python
 
