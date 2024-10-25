@@ -18,6 +18,8 @@ Contents
 
 .. toctree::
 
+   installation
+   quantification
    usage
    advanced
    api
