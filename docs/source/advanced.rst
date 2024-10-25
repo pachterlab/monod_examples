@@ -43,7 +43,8 @@ For fits with meK-Means clustering, we also have to specify a cluster for the se
 
   search_result = monod_adata.uns['search_result_list'][cluster]
 
-TODO: check the following are still correct.
+..
+  TODO: check the following are still correct.
 
 To identify the technical noise parameter optimum, call a method of a SearchResults object:
 
