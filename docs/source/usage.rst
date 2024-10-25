@@ -4,7 +4,9 @@ Usage
 Pre-processing 
 ----------------
 
-In the anndata Monod version, cell/gene filtering can be done using scanpy, and the resulting anndata object can be directly input into the inference procedure. For example:
+In the anndata Monod version, the input should be an anndata file or object, with layers corresponding to each modality in the model (e.g. 'spliced', 'unspliced').
+
+Cell/gene filtering can be done using scanpy as desired, and the resulting anndata object can be directly input into the inference procedure. For example:
 
 .. code-block:: python
 
