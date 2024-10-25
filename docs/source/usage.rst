@@ -4,9 +4,16 @@ Usage
 Pre-processing 
 ----------------
 
-Additional cell/gene filtering can be done using scanpy, and the resulting anndata object can be directly input into Monod. Alternatively, the raw filename can be given.
+In the anndata Monod version, cell/gene filtering can be done using scanpy, and the resulting anndata object can be directly input into the inference procedure. For example:
 
-TODO: add scanpy code.
+.. code-block:: python
+
+ gaba_adata = anndata.read_h5ad('./gaba_example.h5ad')
+ scanpy.pp.filter_cells(gaba_adata, min_counts=threshold)
+
+..
+ add more here?
+
 
 Defining a Model
 ----------------------
