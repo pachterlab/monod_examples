@@ -1,6 +1,8 @@
 Quantification
 =====
 
+TODO: Update with -nac version.
+
 To generate an intronic index for ``kb``, obtain a reference genome and run ``kb ref``:
 
 .. code-block:: console
