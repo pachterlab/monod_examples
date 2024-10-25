@@ -6,7 +6,7 @@ Advanced Options
 Additional Fit Parameters
 ------------
 
-Additional keyword arguments can be used to adjust the settings of the fit. TODO: go through the rest of the keyword parameters.
+Additional keyword arguments can be used to adjust the settings of the fit. 
 
 To set the name of the output folder, set ``dataset_string='your_output_dirname'``. Set ``viz=True`` (default) to visualize the gene filtering.
 
