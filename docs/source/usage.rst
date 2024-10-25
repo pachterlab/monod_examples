@@ -36,7 +36,7 @@ The entire inference procedure can be carried out in a single function, :py:func
 
  fitted_adata = inference.perform_inference(input_adata, fitmodel, dataset_string='your_output_dirname')
 
-Note that the code will expect the anndata object to have specific layer names (e.g. 'unspliced', 'spliced', 'protein'). If these are not the names you have, please include the keyword argument e.g. ``modality_name_dict = {'unspliced': 'nascent', 'spliced': 'mature', 'protein':'your_protein_name'}''.
+Note that the code will expect the anndata object to have specific layer names (e.g. 'unspliced', 'spliced', 'protein'). If these are not the names you have, please include the keyword argument e.g. ``modality_name_dict = {'unspliced': 'nascent', 'spliced': 'mature', 'protein':'your_protein_name'}``.
 
 This call will first filter the given anndata for suitable genes. Then it will iterate over a grid of sampling parameter values, and fit the optimum biological parameters for each gene for the given CME model.
 
