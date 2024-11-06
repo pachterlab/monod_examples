@@ -1,6 +1,8 @@
 Usage
 =====
 
+For an example workflow, please see the anndata `demo notebook <https://colab.research.google.com/github/pachterlab/monod/blob/anndata/Monod_demo_new.ipynb>`_.
+
 Pre-processing 
 ----------------
 
