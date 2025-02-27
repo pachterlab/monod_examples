@@ -46,7 +46,7 @@ This call will first filter the given anndata for suitable genes. Then it will i
 
 The output is an anndata object including moments and fitted parameters for each gene, at the sampling parameter optimum. The results will be saved to the output directory specified in ``dataset_string``. 
 
-Length-dependent noise models can be implemented if a transcriptome length annotation is provided, using ``transcriptome_filepath='transcriptome_filepath'``. Note that the presence or absence of a ``transcriptome_filepath'' parameter plays the role of the Boolean ``use_lengths'' in the previous Monod.
+Length-dependent noise models can be implemented if a transcriptome length annotation is provided, using ``transcriptome_filepath='transcriptome_filepath'``. Note that the presence or absence of a ``transcriptome_filepath`` parameter plays the role of the Boolean ``use_lengths`` in the previous Monod.
 
 Fitting Parameters by Cluster
 -------------------
