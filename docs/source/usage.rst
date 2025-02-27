@@ -6,7 +6,7 @@ For an example workflow, please see the anndata `demo notebook <https://colab.re
 Pre-processing 
 ----------------
 
-In the anndata Monod version, the input should be an anndata file or object, with layers corresponding to each modality in the model (e.g. 'spliced', 'unspliced').
+In the anndata Monod version, the input should be an anndata file or object, with layers corresponding to each modality in the model (e.g. 'spliced', 'unspliced'). The observations should be cells, and the variables, genes.
 
 Cell/gene filtering can be done using scanpy as desired, and the resulting anndata object can be directly input into the inference procedure. For example:
 
