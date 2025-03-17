@@ -40,4 +40,4 @@ The raw data and full search results have been deposited on Zenodo. The prerequi
 
 The `figs/` directory contains manuscript figures.
 
-`celltype_splitter.ipynb` extracts glutamatergic and GABAergic cell types for `sample_data`.![image](https://github.com/user-attachments/assets/517c36d4-6fe4-49df-a2ea-93a09b8533b5)
+`celltype_splitter.ipynb` extracts glutamatergic and GABAergic cell types for `sample_data`.
