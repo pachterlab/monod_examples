@@ -18,7 +18,7 @@ This directory contains notebooks used to generate manuscript figures and result
 * `Fig4`: Folder containing scripts to generate subplots for Figure 4.
   * `mc240513_allen_B08_fit.py` to  fit Allen sample B08 cell types with different models to compare biophysical models.
   * `modelComparisonAllen.py` to extract metrics of model comparison from fits. 
-  * `modelComparisonsAllen_analysis.ipynb' to further compare models and generate figures. 
+  * `modelComparisonsAllen_analysis.ipynb` to further compare models and generate figures. 
 
 
 * `Fig5`: Folder containing scripts to generate subplots for Figure 5.
